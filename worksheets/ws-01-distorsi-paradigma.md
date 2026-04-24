@@ -61,25 +61,25 @@ Dalam DSR, artefak **bukan tujuan akhir** — ia adalah instrumen untuk menghasi
 ## Template A.1 — Research Mindset Self-Assessment
 
 ```
-Nama Peneliti    : ____________________
-Tanggal          : ____________________
+Nama Peneliti    : Azzam Zain Zaidan Sudiyono
+Tanggal          : 24 April 2026
 
 1. Ketika membaca klaim "metode X 95% akurat":
-   - Pertanyaan pertama saya: ____________________
-   - Data yang dibutuhkan untuk verifikasi: ____________________
+   - Pertanyaan pertama saya: Dataset apa yang digunakan? Apakah dibandingkan dengan baseline yang fair?
+   - Data yang dibutuhkan untuk verifikasi: Confusion matrix, ukuran dataset, distribusi data, metode evaluasi (cross-validation / holdout)
 
 2. Posisi paradigma:
-   - Pendekatan: [ ] Positivis  [ ] Interpretivis  [ ] Design Science  [ ] Mixed
-   - Alasan: ____________________
+   - Pendekatan: [v] Positivis  [ ] Interpretivis  [v] Design Science  [ ] Mixed
+   - Alasan: Penelitian ini fokus ke arah pengujian performa dan membangun model untuk diuji
 
 3. Identifikasi distorsi:
-   - Asumsi tersembunyi: ____________________
-   - Sumber bias potensial: ____________________
-   - Langkah mitigasi: ____________________
+   - Asumsi tersembunyi: data ini menunjukan kondisi real/nyata
+   - Sumber bias potensial: data tidak beragam dan overfitting
+   - Langkah mitigasi: menggunakan data yang beragam,validasi menyilang,dan pengujian data yang berbeda
 
 4. Komitmen etika:
-   - Data yang tidak akan dimanipulasi: ____________________
-   - Batasan yang diakui sejak awal: ____________________
+   - Data yang tidak akan dimanipulasi: data eksperimen dan hasil evaluasi model
+   - Batasan yang diakui sejak awal: model hanya diuji pada dataset tertentu
 ```
 
 ---
@@ -93,25 +93,31 @@ Pilih satu paper riset di bidang TI yang mengklaim "metode X meningkatkan perfor
 > **Contoh domain TI:** "Deteksi anomali lalu-lintas jaringan menggunakan CNN — akurasi meningkat 94% vs baseline SVM 87%." Distorsi potensial: apakah dataset normal/anomali seimbang? Apakah hanya diuji pada satu vendor traffic?
 
 **Paper yang dipilih:**
-> Judul: _______________________________________________
-> Penulis (Tahun): ______________________________________
-> Sumber/Link DOI: _____________________________________
+> Judul: Penerapan Teknik SMOTE untuk Mendeteksi Perilaku Jaringan Berbasis Trafik Enkripsi
+> Penulis (Tahun): Ulfi Muzayyanah Fadil dkk (2025)
+> Sumber/Link DOI: (https://doi.org/10.23960/jitet.v14i1.8880)
 
 | Tahap | Apa yang Dilakukan | Potensi Distorsi |
 |-------|-------------------|-----------------|
-| Reality → Data | *Contoh: Kumpulkan log server 30 hari* | *Contoh: Hanya ambil jam sibuk* |
-| Data → Processing | | |
-| Processing → Analysis | | |
-| Analysis → Inference | | |
-| Inference → Knowledge | | |
+| Reality → Data | Menggunakan dataset trafik jaringan terenkripsi dari dataset publik & capture jaringan | Dataset bisa tidak representatif terhadap kondisi jaringan nyata |
+| Data → Processing |Data dinormalisasi dan diseimbangkan menggunakan SMOTE |Data sintetis hasil SMOTE tidak sepenuhnya mencerminkan data asli |
+| Processing → Analysis |Model Random Forest dilatih dengan data sebelum dan sesudah SMOTE|Overfitting karena data hasil oversampling |
+| Analysis → Inference |Performa model dibandingkan menggunakan akurasi, precision, recall, dan F1-score |Metrik bisa bias karena distribusi data sudah diubah |
+| Inference → Knowledge |Disimpulkan bahwa SMOTE meningkatkan performa deteksi anomali|Generalisasi berlebihan ke semua kasus jaringan |
 
-**Distorsi paling besar di tahap:** ________________________
+**Distorsi paling besar di tahap:** Processing
+
+Alasan:
+Karena di tahap ini data diubah pakai SMOTE jadi data tambahan (buatan).
+Di jurnal juga dijelasin kalau SMOTE bikin data baru dari data yang sudah ada
 
 **Dua distorsi spesifik yang teridentifikasi:**
-1. ___________________________________________________
-2. ___________________________________________________
+1. Bias karena data buatan
+   -SMOTE bikin data anomali tambahan
+   -Data bukan kejadian asli/real
+2. Bias karena distribusi data berubah
+   Awalnya data normal jauh lebih banyak anomali,namun setelah di SMOTE jadi seimbang. Masalahnya,dunia nyata biasanya tetap tidak seimbang.Jadi hasil model belum tentu sesuai dengan kondisi asli 
 
----
 
 ## Latihan 2 — Analisis Kasus Etika
 
@@ -119,29 +125,28 @@ Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, ha
 
 | Perspektif | Analisis |
 |------------|---------|
-| Kejujuran ilmiah | *Contoh: Laporkan kedua versi (dengan dan tanpa outlier)* |
-| Transparansi | |
-| Peer review | |
+| Kejujuran ilmiah |Peneliti harus jujur dan tidak boleh menghapus data hanya supaya hasilnya terlihat bagus |
+| Transparansi |Kalau memang outlier mau dihapus, harus dijelaskan alasannya dan tetap ditampilkan hasil sebelum & sesudah |
+| Peer review |Reviewer biasanya akan mempertanyakan kenapa data dihapus dan apakah itu mempengaruhi hasil penelitian |
 
 **Keputusan akhir dan justifikasi:**
-> ___________________________________________________
-
----
+Menurut saya, data outlier tidak boleh dihapus hanya untuk membuat hasil yang bagus.
+Kalau memang outlier itu kesalahan data (misalnya error sistem), boleh dihapus, tapi harus dijelaskan juga alasannya serta tetap ditampilkan hasil sebelum dan sesudah.
 
 ## Latihan 3 — Posisi Paradigma
 
-**Topik riset:** ________________________________________
+**Topik riset:** Deteksi anomali jaringan menggunakan SMOTE dan Random Forest
 
 > **Skala 1–5:** 1 = tidak sesuai sama sekali dengan topik ini, 5 = sangat sesuai dan dominan digunakan pada riset bertopik serupa.
 
 | Kriteria | Positivis | Interpretivis | Design Science |
 |----------|-----------|---------------|----------------|
-| Kesesuaian dengan topik (1–5) | *Contoh: 4 — topik kuantitatif, cocok uji hipotesis* | *Contoh: 2 — topik tidak studi makna/konteks* | *Contoh: 5 — membangun artefak untuk uji klaim* |
-| Jenis data yang dikumpulkan | *Metrik numerik, log eksperimen* | *Wawancara, observasi kualitatif* | *Hasil uji artefak, komparasi kinerja* |
-| Limitasi paradigma | | | |
+| Kesesuaian dengan topik (1–5) | 4 | 1 | 3 |
+| Jenis data yang dikumpulkan | Data numerik (dataset jaringan, metrik akurasi, recall) | Tidak relevan | Hasil eksperimen model |
+| Limitasi paradigma |Tidak melihat konteks dunia nyata secara mendalam |Tidak cocok untuk penelitian berbasis data & model |Fokus ke sistem, bukan pengujian hipotesis |
 
-**Paradigma yang dipilih:** _____________________________
-**Alasan:** ____________________________________________
+**Paradigma yang dipilih:** Positivis
+**Alasan:** Karena penelitian ini menggunakan data numerik,menguji performa model,membandingkan hasil sebelum dan sesdah SMOTE. Jadi menurut saya lebih cocok ke ke positivis 
 
 ---
 
@@ -150,5 +155,10 @@ Skenario: Seorang peneliti menemukan bahwa jika 3 data point outlier dihapus, ha
 > Sebelum membaca materi ini, apakah pernah mempertanyakan klaim "95% akurat"? Setelah memahami rantai distorsi, pertanyaan apa yang sekarang akan diajukan saat membaca paper?
 
 **Jawaban:**
-> ___________________________________________________
-> ___________________________________________________
+> Sebelum membaca materi ini, saya biasanya langsung percaya saja kalau melihat klaim seperti “95% akurat” tanpa terlalu mempertanyakan bagaimana hasil itu didapatkan
+> Setelah memahami adanya kemungkinan distorsi di setiap tahap penelitian, sekarang saya jadi lebih berpikir luas dan akan terpikirkan pertanyaan seperti:
+   -Data apa yang digunakan? Apakah seimbang atau tidak?
+   -Apakah ada preprocessing seperti SMOTE yang bisa mempengaruhi hasil?
+   -Metode evaluasi yang dipakai apa?
+   -Apakah dibandingkan dengan metode lain secara adil?
+   -Dan apakah hasilnya bisa diterapkan di kondisi nyata atau hanya di dataset tertentu saja?
