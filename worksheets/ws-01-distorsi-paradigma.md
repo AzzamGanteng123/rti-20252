@@ -94,7 +94,7 @@ Pilih satu paper riset di bidang TI yang mengklaim "metode X meningkatkan perfor
 
 **Paper yang dipilih:**
 > Judul: Penerapan Teknik SMOTE untuk Mendeteksi Perilaku Jaringan Berbasis Trafik Enkripsi
-> Penulis (Tahun): Ulfi Muzayyanah Fadil dkk (2025)
+> Penulis (Tahun): Ulfi Muzayyanah Fadil(2025)
 > Sumber/Link DOI: (https://doi.org/10.23960/jitet.v14i1.8880)
 
 | Tahap | Apa yang Dilakukan | Potensi Distorsi |
